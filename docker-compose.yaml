@@ -9,10 +9,22 @@ services:
     ports:
       - "8000:8000"
     depends_on:
-      - my-postgres
+      - itsm-postgres
     user: 1100:1100
 
-  my-postgres:
-    image: postgres
+  itsm-postgres:
+    image: postgres:latest
+    container_name: itsm-postgres
+    restart: always
     environment:
+      POSTGRES_USER: postgres
       POSTGRES_PASSWORD: itsmpass
+      POSTGRES_DB: itsm
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+      - ./db-init:/docker-entrypoint-initdb.d
+
+volumes:
+  postgres_data:
