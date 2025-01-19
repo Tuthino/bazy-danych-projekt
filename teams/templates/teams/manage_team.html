@@ -1,0 +1,40 @@
+{% extends "dashboard/base.html" %}
+
+{% block title %}Assign Users to {{ team.name }}{% endblock %}
+
+{% block content %}
+<div class="content">
+    <h1>Manage Users for {{ team.name }}</h1>
+
+    <!-- Users already in the team -->
+    <h2>Team Members</h2>
+    <ul>
+        {% for user_team in team_users %}
+            <li>
+                {{ user_team.user.username }}
+                <!-- Kick user from the team -->
+                <form method="POST" style="display:inline;">
+                    {% csrf_token %}
+                    <input type="hidden" name="remove_user_id" value="{{ user_team.user.id }}">
+                    <button type="submit">Kick</button>
+                </form>
+            </li>
+        {% endfor %}
+    </ul>
+
+    <!-- Add new users to the team -->
+    <h2>Add Users</h2>
+    <form method="POST">
+        {% csrf_token %}
+        <select name="user_id" required>
+            <option value="" disabled selected>Select a user</option>
+            {% for user in users %}
+                <option value="{{ user.id }}">{{ user.username }}</option>
+            {% endfor %}
+        </select>
+        <button type="submit">Add User</button>
+    </form>
+
+    <a href="{% url 'team_list' %}">Back to Teams</a>
+</div>
+{% endblock %}

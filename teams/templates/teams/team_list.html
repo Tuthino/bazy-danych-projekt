@@ -1,0 +1,33 @@
+{% extends "dashboard/base.html" %}
+{% block title %}Teams{% endblock %}
+{% block content %}
+    <div class="content">
+        <h1>Teams assigned to me</h1>
+        <ul>
+            {% for item in assigned_teams %}
+                <li>
+                    {{ item.team.name }}
+                    {% if item.is_admin %}
+                        - <a href="{% url 'manage_team' item.team.id %}">Manage Team</a>
+                    {% endif %}
+                </li>
+            {% endfor %}
+        </ul>
+        {% if user.is_admin %}
+            <h1>All teams</h1>
+            <ul>
+                {% for item in all_teams %}
+                    <li>
+                        {{ item.team.name }}
+                        {% if item.is_admin %}
+                            - <a href="{% url 'manage_team' item.team.id %}">Manage Team</a>
+                        {% endif %}
+                    </li>
+                {% endfor %}
+            </ul>
+        {% endif %}
+        {% if user.admin %}
+            <a href="{% url 'create_team' %}">Create New Team</a>
+        {% endif %}
+    </div>
+{% endblock %}

@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        {% load static %}
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>
+            {% block title %}Dashboard{% endblock %}
+        </title>
+        <link rel="stylesheet" href="{% static 'dashboard/style.css' %}">
+    </head>
+    <body>
+        <header>
+            <h1>Dashboard Header</h1>
+            {% if user %}
+                <p>Welcome, {{ user }}!</p>
+            {% else %}
+                <p>Welcome, Guest!</p>
+            {% endif %}
+            <nav>
+                <a href="{% url 'team_list' %}">Teams</a>
+                <a href="{% url 'dashboard' %}">Home</a>
+                {% if user %}
+                    <form action="{% url 'logout' %}" method="post" style="display: inline;">
+                        {% csrf_token %}
+                        <button type="submit">Logout</button>
+                    </form>
+                {% else %}
+                    <form action="{% url 'login' %}" method="post" style="display: inline;">
+                        {% csrf_token %}
+                        <button type="submit">Login</button>
+                    </form>
+                {% endif %}
+            </nav>
+        </header>
+        <aside>
+            <div class="sidebar">
+                <h2>Sidebar</h2>
+                <ul>
+                    <li>
+                        <a href="{% url 'dashboard' %}">Dashboard</a>
+                    </li>
+                    {% if user.admin %}
+                        <li>
+                            <a href="{% url 'team_list' %}">Manage Teams</a>
+                        </li>
+                    {% endif %}
+                </ul>
+            </div class="sidebar">
+        </aside>
+        <main>
+            {% block content %}<!-- Main content will go here -->{% endblock %}
+        </main>
+    </body>
+</html>

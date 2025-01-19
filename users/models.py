@@ -4,16 +4,16 @@ from django.db import models
 from django.db import models
 from django.contrib.auth.models import AbstractBaseUser, BaseUserManager
 
-
-class Team(models.Model):
-    name = models.TextField()
-
-    def __str__(self):
-        return self.name
-
-
+#
+# class Team(models.Model):
+#     name = models.TextField()
+#
+#     def __str__(self):
+#         return self.name
+#
+#
 class UserManager(BaseUserManager):
-    def create_user(self, name, password=None, **extra_fields):
+    def create_user(self, username, password=None, **extra_fields):
         if not name:
             raise ValueError("The Name field must be set")
         user = self.model(name=name, **extra_fields)
@@ -26,8 +26,8 @@ class UserManager(BaseUserManager):
         return self.create_user(name, password, **extra_fields)
 
 
-class Username(AbstractBaseUser):
-    name = models.TextField(unique=True)
+class User(AbstractBaseUser):
+    username = models.TextField(unique=True)
     email = models.TextField(null=True, blank=True)
     phone = models.BigIntegerField(null=True, blank=True)
     logged_in = models.BooleanField(default=False)
@@ -35,11 +35,11 @@ class Username(AbstractBaseUser):
 
     objects = UserManager()
 
-    USERNAME_FIELD = "name"
+    USERNAME_FIELD = "username"
     REQUIRED_FIELDS = []
 
     def __str__(self):
-        return self.name
+        return self.username
 
     def has_perm(self, perm, obj=None):
         return True
@@ -48,30 +48,30 @@ class Username(AbstractBaseUser):
         return True
 
     @property
-    def is_staff(self):
+    def is_admin(self):
         return self.admin
+#
+#
+# class UsernameTeam(models.Model):
+#     username = models.ForeignKey(Username, on_delete=models.CASCADE)
+#     team = models.ForeignKey(Team, on_delete=models.CASCADE)
+#     team_admin = models.BooleanField()
+#
+#     def __str__(self):
+#         return f"{self.username.name} - {self.team.name}"
+#
+#
+# class TicketStatusType(models.Model):
+#     name = models.TextField()
+#
+#     def __str__(self):
+#         return self.name
+#
 
-
-class UsernameTeam(models.Model):
-    username = models.ForeignKey(Username, on_delete=models.CASCADE)
-    team = models.ForeignKey(Team, on_delete=models.CASCADE)
-    team_admin = models.BooleanField()
-
-    def __str__(self):
-        return f"{self.username.name} - {self.team.name}"
-
-
-class TicketStatusType(models.Model):
-    name = models.TextField()
-
-    def __str__(self):
-        return self.name
-
-
-class AffectedEquipment(models.Model):
-    ticket = models.BigIntegerField()
-    equipment = models.BigIntegerField()
-
-    def __str__(self):
-        return f"Ticket: {self.ticket} - Equipment: {self.equipment}"
+# class AffectedEquipment(models.Model):
+#     ticket = models.BigIntegerField()
+#     equipment = models.BigIntegerField()
+#
+#     def __str__(self):
+#         return f"Ticket: {self.ticket} - Equipment: {self.equipment}"
 
