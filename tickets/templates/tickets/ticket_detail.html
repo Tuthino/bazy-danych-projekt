@@ -1,0 +1,145 @@
+{% extends "dashboard/base.html" %}
+{% block title %}Manage Ticket{% endblock %}
+{% block content %}
+    <div class="content">
+        <h1>Manage Ticket #{{ ticket.id }}</h1>
+        <p>Type: {{ ticket.type.name }}</p>
+        <p>Category: {{ ticket.category }}</p>
+        <p>Status: {{ ticket.status.name }}</p>
+        <p>Creator: {{ ticket.creator.username }}</p>
+        <p>Owner Team: {{ ticket.owner_team.name }}</p>
+        <p>Started: {{ ticket.issue_started }}</p>
+        <p>Resolved: {{ ticket.issue_resolved|default:"N/A" }}</p>
+        <h3>Request a Team</h3>
+        <form method="post">
+            {% csrf_token %}
+            <input type="hidden" name="request_team" value="1">
+            <label for="team_id">Team:</label>
+            <select id="team_id" name="team_id" required>
+                <option value="" disabled selected>Select Team</option>
+                {% for team in available_teams %}<option value="{{ team.id }}">{{ team.name }}</option>{% endfor %}
+            </select>
+            <br>
+            <button type="submit">Request Team</button>
+        </form>
+        {% if can_resolve %}
+            <h3>Update Ticket Status</h3>
+            <form method="post">
+                {% csrf_token %}
+                <input type="hidden" name="update_ticket_status" value="1">
+                <label for="ticket_status">Select new status:</label>
+                <select name="ticket_status" id="ticket_status" required>
+                    <option value="" disabled selected>Select Status</option>
+                    {% for status in ticket_statuses %}
+                        <option value="{{ status.id }}"
+                                {% if status.id == ticket.status.id %}selected{% endif %}>{{ status.name }}</option>
+                    {% endfor %}
+                </select>
+                <button type="submit">Update Status</button>
+            </form>
+            <h3>Resolve Ticket</h3>
+            <form method="post">
+                {% csrf_token %}
+                <input type="hidden" name="resolve_ticket" value="1">
+                <button type="submit">Resolve Ticket</button>
+            </form>
+        {% endif %}
+        <h2>Requested Teams</h2>
+        <button class="toggle-btn" data-target="requested-list">Show/Hide Requested Teams</button>
+        <table id="requested-list" class="styled-table">
+            <thead>
+                <tr>
+                    <th>Team</th>
+                    <th>Current Status</th>
+                    {% if show_actions %}<th>Actions</th>{% endif %}
+                </tr>
+            </thead>
+            <tbody>
+                {% for requested_team in requested_teams %}
+                    <tr>
+                        <td>{{ requested_team.team.name }}</td>
+                        <td>{{ requested_team.status.name }}</td>
+                        {% if requested_team.user_part_of_team %}
+                            <td>
+                                <form method="post" action="">
+                                    {% csrf_token %}
+                                    <input type="hidden" name="update_status" value="1">
+                                    <input type="hidden"
+                                           name="requested_team_id"
+                                           value="{{ requested_team.id }}">
+                                    <label for="status-{{ requested_team.id }}">Change Status:</label>
+                                    <select name="status" id="status-{{ requested_team.id }}">
+                                        {% for status in acknowledgment_statuses %}
+                                            <option value="{{ status.id }}"
+                                                    {% if status.id == requested_team.status.id %}selected{% endif %}>
+                                                {{ status.name }}
+                                            </option>
+                                        {% endfor %}
+                                    </select>
+                                    <button type="submit">Update</button>
+                                </form>
+                            </td>
+                        {% endif %}
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+        <br>
+        <h2>Affected Equipment</h2>
+        <button class="toggle-btn" data-target="affected-equipment">Show/Hide Equipment</button>
+        <div id="affected-equipment">
+            {% if affected_equipments %}
+                <ul>
+                    {% for affected in affected_equipments %}
+                        <li>
+                            <a href="{% url 'equipment_detail' affected.equipment.id %}">{{ affected.equipment.name }}</a>
+                            <form method="post" style="display:inline;">
+                                {% csrf_token %}
+                                <input type="hidden" name="remove_affected_equipment" value="1">
+                                <input type="hidden" name="affected_id" value="{{ affected.id }}">
+                                <button type="submit">Remove</button>
+                            </form>
+                        </li>
+                    {% endfor %}
+                </ul>
+            {% else %}
+                <p>No affected equipment linked to this ticket.</p>
+            {% endif %}
+        </div>
+        <h3>Add Affected Equipment</h3>
+        <form method="post">
+            {% csrf_token %}
+            <input type="hidden" name="add_affected_equipment" value="1">
+            <label for="equipment_id">Select Equipment:</label>
+            <select id="equipment_id" name="equipment_id" required>
+                <option value="" disabled selected>Select Equipment</option>
+                {% for equipment in available_equipment %}<option value="{{ equipment.id }}">{{ equipment.name }}</option>{% endfor %}
+            </select>
+            <button type="submit">Add Equipment</button>
+        </form>
+        <h2>Comments</h2>
+        <button class="toggle-btn" data-target="comments-list">Show/Hide Comments</button>
+        <ul id="comments-list" class="toggle-target">
+            {% for comment in comments %}
+                <li>
+                    <strong>{{ comment.username.username }}</strong>: {{ comment.comment_text }}
+                    ({{ comment.comment_type.name }} at {{ comment.created_at }})
+                </li>
+            {% endfor %}
+        </ul>
+        <h3>Add Comment</h3>
+        <form method="post">
+            {% csrf_token %}
+            <label for="comment_type">Type:</label>
+            <select id="comment_type" name="comment_type" required>
+                <option value="" disabled selected>Select Comment Type</option>
+                {% for type in comment_types %}<option value="{{ type.id }}">{{ type.name }}</option>{% endfor %}
+            </select>
+            <br>
+            <textarea name="comment_text" rows="3" required></textarea>
+            <br>
+            <button type="submit" name="add_comment">Add Comment</button>
+        </form>
+        <a href="{% url 'ticket_list' %}">Back to Tickets</a>
+    </div>
+{% endblock %}

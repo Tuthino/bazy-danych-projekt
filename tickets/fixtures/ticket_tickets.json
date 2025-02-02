@@ -1,0 +1,119 @@
+[
+    {
+        "model": "tickets.ticket",
+        "pk": 1,
+        "fields": {
+            "type": 1,  
+            "creator": 1,  
+            "category": 1,  
+            "owner_team": 1,  
+            "status": 1,  
+            "issue_started": "2025-01-01T10:00:00Z",
+            "issue_resolved": null
+        }
+    },
+    {
+        "model": "tickets.ticket",
+        "pk": 2,
+        "fields": {
+            "type": 2,
+            "creator": 2,
+            "category": 2,
+            "owner_team": 2,
+            "status": 3,
+            "issue_started": "2025-01-02T12:30:00Z",
+            "issue_resolved": "2025-01-03T15:00:00Z"
+        }
+    },
+    {
+        "model": "tickets.ticket",
+        "pk": 3,
+        "fields": {
+            "type": 3,
+            "creator": 3,
+            "category": 3,
+            "owner_team": 3,
+            "status": 1,
+            "issue_started": "2025-01-04T09:00:00Z",
+            "issue_resolved": null
+        }
+    },
+    {
+        "model": "tickets.ticket",
+        "pk": 4,
+        "fields": {
+            "type": 1,
+            "creator": 4,
+            "category": 4,
+            "owner_team": 1,
+            "status": 1,
+            "issue_started": "2025-01-05T08:45:00Z",
+            "issue_resolved": null
+        }
+    },
+    {
+        "model": "tickets.ticketsaffectedequipment",
+        "pk": 1,
+        "fields": {
+            "ticket": 1,
+            "equipment": 2
+        }
+    },
+    {
+        "model": "tickets.ticketsaffectedequipment",
+        "pk": 2,
+        "fields": {
+            "ticket": 1,
+            "equipment": 3
+        }
+    },
+    {
+        "model": "tickets.ticketsaffectedequipment",
+        "pk": 3,
+        "fields": {
+            "ticket": 2,
+            "equipment": 1
+        }
+    },
+    {
+        "model": "tickets.ticketsaffectedequipment",
+        "pk": 4,
+        "fields": {
+            "ticket": 2,
+            "equipment": 4
+        }
+    },
+    {
+        "model": "tickets.ticketsaffectedequipment",
+        "pk": 5,
+        "fields": {
+            "ticket": 3,
+            "equipment": 2
+        }
+    },
+    {
+        "model": "tickets.ticketsaffectedequipment",
+        "pk": 6,
+        "fields": {
+            "ticket": 3,
+            "equipment": 1
+        }
+    },
+    {
+        "model": "tickets.ticketsaffectedequipment",
+        "pk": 7,
+        "fields": {
+            "ticket": 4,
+            "equipment": 3
+        }
+    },
+    {
+        "model": "tickets.ticketsaffectedequipment",
+        "pk": 8,
+        "fields": {
+            "ticket": 4,
+            "equipment": 4
+        }
+    }
+]
+

@@ -1,0 +1,74 @@
+{% extends "dashboard/base.html" %}
+{% block title %}Ticket List{% endblock %}
+{% block content %}
+    <div class="content">
+        <h1>All Tickets</h1>
+        <form method="get" style="margin-bottom: 20px;">
+            <label for="status">Filter by Status:</label>
+            <select id="status" name="status">
+                <option value="">All</option>
+                {% for status in statuses %}
+                    <option value="{{ status.id }}"
+                            {% if selected_status == status.id %}selected{% endif %}>{{ status.name }}</option>
+                {% endfor %}
+            </select>
+            <label for="filter_type">Start Date Filter:</label>
+            <select id="filter_type" name="filter_type">
+                <option value="">None</option>
+                <option value="after" {% if filter_type == "after" %}selected{% endif %}>After</option>
+                <option value="before" {% if filter_type == "before" %}selected{% endif %}>Before</option>
+                <option value="between" {% if filter_type == "between" %}selected{% endif %}>Between</option>
+            </select>
+            <label for="start_date">Start Date:</label>
+            <input type="datetime-local"
+                   id="start_date"
+                   name="start_date"
+                   value="{{ start_date }}">
+            <label for="end_date">End Date:</label>
+            <input type="datetime-local"
+                   id="end_date"
+                   name="end_date"
+                   value="{{ end_date }}">
+            <label for="resolved_start_date">Resolved After:</label>
+            <input type="datetime-local"
+                   id="resolved_start_date"
+                   name="resolved_start_date"
+                   value="{{ resolved_start_date }}">
+            <label for="resolved_end_date">Resolved Before:</label>
+            <input type="datetime-local"
+                   id="resolved_end_date"
+                   name="resolved_end_date"
+                   value="{{ resolved_end_date }}">
+            <button type="submit">Filter</button>
+        </form>
+        <a href="{% url 'ticket_create' %}">Create New Ticket</a>
+        <table>
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Type</th>
+                    <th>Status</th>
+                    <th>Creator</th>
+                    <th>Started At</th>
+                    <th>Resolved At</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for ticket in tickets %}
+                    <tr>
+                        <td>{{ ticket.id }}</td>
+                        <td>{{ ticket.type.name }}</td>
+                        <td>{{ ticket.status.name }}</td>
+                        <td>{{ ticket.creator.username }}</td>
+                        <td>{{ ticket.issue_started }}</td>
+                        <td>{{ ticket.issue_resolved|default:"N/A" }}</td>
+                        <td>
+                            <a href="{% url 'ticket_detail' ticket.id %}">Manage</a>
+                        </td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+{% endblock %}

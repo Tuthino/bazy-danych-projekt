@@ -8,12 +8,13 @@
             {% block title %}Dashboard{% endblock %}
         </title>
         <link rel="stylesheet" href="{% static 'dashboard/style.css' %}">
+        <script src="{% static 'dashboard/js/toggle.js' %}"></script>
     </head>
     <body>
         <header>
             <h1>Dashboard Header</h1>
             {% if user %}
-                <p>Welcome, {{ user }}!</p>
+                <p>Welcome, {{ user.username }}!</p>
             {% else %}
                 <p>Welcome, Guest!</p>
             {% endif %}
@@ -40,10 +41,21 @@
                     <li>
                         <a href="{% url 'dashboard' %}">Dashboard</a>
                     </li>
-                    {% if user.admin %}
+                    {% if user %}
                         <li>
-                            <a href="{% url 'team_list' %}">Manage Teams</a>
+                            <a href="{% url 'equipment_list' %}">Equipment list</a>
                         </li>
+                        <li>
+                            <a href="{% url 'ticket_list' %}">Ticket list</a>
+                        </li>
+                        <li>
+                            <a href="{% url 'my_teams_tickets' %}">Team tickets list</a>
+                        </li>
+                        {% if user.admin %}
+                            <li>
+                                <a href="{% url 'team_list' %}">Manage Teams</a>
+                            </li>
+                        {% endif %}
                     {% endif %}
                 </ul>
             </div class="sidebar">
@@ -52,4 +64,9 @@
             {% block content %}<!-- Main content will go here -->{% endblock %}
         </main>
     </body>
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            {% for message in messages %}alert("{{ message|escapejs }}");{% endfor %}
+        });
+    </script>
 </html>

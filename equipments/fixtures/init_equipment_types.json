@@ -1,0 +1,31 @@
+[
+    {
+        "model": "equipments.equipmenttype",
+        "pk": 1,
+        "fields": {
+            "name": "PC"
+        }
+    },
+
+    {
+        "model": "equipments.equipmenttype",
+        "pk": 2,
+        "fields": {
+            "name": "Router"
+        }
+    },
+    {
+        "model": "equipments.equipmenttype",
+        "pk": 3,
+        "fields": {
+            "name": "Switch"
+        }
+    },
+    {
+        "model": "equipments.equipmenttype",
+        "pk": 4,
+        "fields": {
+            "name": "Server"
+        }
+    }
+]

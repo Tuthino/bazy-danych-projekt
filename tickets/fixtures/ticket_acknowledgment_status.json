@@ -1,0 +1,23 @@
+[
+    {
+        "model": "tickets.ticketacknowledgmentstatus",
+        "pk": 1,
+        "fields": {
+            "name": "Pending"
+        }
+    },
+    {
+        "model": "tickets.ticketacknowledgmentstatus",
+        "pk": 2,
+        "fields": {
+            "name": "Accepted"
+        }
+    },
+    {
+        "model": "tickets.ticketacknowledgmentstatus",
+        "pk": 3,
+        "fields": {
+            "name": "Rejected"
+        }
+    }
+]

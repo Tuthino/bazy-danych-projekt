@@ -3,11 +3,12 @@ version: '3'
 services:
   web:
     build: .
-    command: ["python", "manage.py", "runserver", "0.0.0.0:8000"]
     volumes:
       - .:/app:z
+      - ./django-certs:/app/django-certs:z
     ports:
       - "8000:8000"
+      - "443:443"
     depends_on:
       - itsm-postgres
     user: 1100:1100
@@ -17,7 +18,7 @@ services:
     container_name: itsm-postgres
     restart: always
     environment:
-      POSTGRES_USER: postgres
+      POSTGRES_USER: admin
       POSTGRES_PASSWORD: itsmpass
       POSTGRES_DB: itsm
     ports:
@@ -25,6 +26,12 @@ services:
     volumes:
       - postgres_data:/var/lib/postgresql/data
       - ./db-init:/docker-entrypoint-initdb.d
+      - ./db-init/ssl:/var/lib/postgresql/ssl
+    command: >
+      postgres -c ssl=on
+               -c ssl_cert_file=/var/lib/postgresql/ssl/server.crt
+               -c ssl_key_file=/var/lib/postgresql/ssl/server.key
+               -c ssl_ca_file=/var/lib/postgresql/ssl/rootCA.crt
 
 volumes:
   postgres_data:

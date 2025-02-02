@@ -1,0 +1,30 @@
+[
+    {
+        "model": "tickets.tickettype",
+        "pk": 1,
+        "fields": {
+            "name": "Incident"
+        }
+    },
+    {
+        "model": "tickets.tickettype",
+        "pk": 2,
+        "fields": {
+            "name": "Service Request"
+        }
+    },
+    {
+        "model": "tickets.tickettype",
+        "pk": 3,
+        "fields": {
+            "name": "Change Request"
+        }
+    },
+    {
+        "model": "tickets.tickettype",
+        "pk": 4,
+        "fields": {
+            "name": "Problem"
+        }
+    }
+]

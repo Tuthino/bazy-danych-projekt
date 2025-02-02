@@ -1,0 +1,42 @@
+[
+  {
+    "model": "equipments.site",
+    "pk": 1,
+    "fields": {
+      "name": "Headquarters",
+      "additional_info": "Main corporate office located in New York."
+    }
+  },
+  {
+    "model": "equipments.site",
+    "pk": 2,
+    "fields": {
+      "name": "Data Center West",
+      "additional_info": "Primary data center located in California."
+    }
+  },
+  {
+    "model": "equipments.site",
+    "pk": 3,
+    "fields": {
+      "name": "Branch Office North",
+      "additional_info": "Small branch office located in Chicago."
+    }
+  },
+  {
+    "model": "equipments.site",
+    "pk": 4,
+    "fields": {
+      "name": "Data Center East",
+      "additional_info": "Backup data center located in Virginia."
+    }
+  },
+  {
+    "model": "equipments.site",
+    "pk": 5,
+    "fields": {
+      "name": "Satellite Office",
+      "additional_info": "Remote office located in Denver, Colorado."
+    }
+  }
+]

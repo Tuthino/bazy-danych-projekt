@@ -12,8 +12,11 @@ itsm/*.log
 itsm/*.pot
 itsm/*.pyc
 itsm/__pycache__
-itsm/db.sqlite3
 itsm/media
+
+
+db-init/ssl/
+django-certs/
 
 # Backup files # 
 *.bak 

@@ -1,0 +1,37 @@
+[
+    {
+        "model": "tickets.commenttype",
+        "pk": 1,
+        "fields": {
+            "name": "Update"
+        }
+    },
+    {
+        "model": "tickets.commenttype",
+        "pk": 2,
+        "fields": {
+            "name": "Resolution"
+        }
+    },
+    {
+        "model": "tickets.commenttype",
+        "pk": 3,
+        "fields": {
+            "name": "Rejection"
+        }
+    },
+    {
+        "model": "tickets.commenttype",
+        "pk": 4,
+        "fields": {
+            "name": "Approval"
+        }
+    },
+    {
+        "model": "tickets.commenttype",
+        "pk": 5,
+        "fields": {
+            "name": "Request for Information"
+        }
+    }
+]

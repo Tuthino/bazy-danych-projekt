@@ -1,0 +1,49 @@
+{% extends "dashboard/base.html" %}
+{% block title %}Create Equipment{% endblock %}
+{% block content %}
+    <div class="content">
+        <h1>Create Equipment</h1>
+        <form method="post">
+            {% csrf_token %}
+            <label for="name">Name:</label>
+            <input type="text" id="name" name="name" required>
+            <br>
+            <label for="site">Site:</label>
+            <select id="site" name="site" required>
+                <option value="" disabled selected>Select Site</option>
+                {% for site in sites %}<option value="{{ site.id }}">{{ site.name }}</option>{% endfor %}
+            </select>
+            <br>
+            <label for="type">Type:</label>
+            <select id="type" name="type" required>
+                <option value="" disabled selected>Select Type</option>
+                {% for type in equipment_types %}<option value="{{ type.id }}">{{ type.name }}</option>{% endfor %}
+            </select>
+            <br>
+            <label for="last_change_ticket">Last Change Ticket (Optional):</label>
+            <input type="number" id="last_change_ticket" name="last_change_ticket">
+            <br>
+            <label for="first_level_support_team">1L Support Team:</label>
+            <select id="first_level_support_team"
+                    name="first_level_support_team"
+                    required>
+                <option value="" disabled selected>Select Team</option>
+                {% for team in teams %}<option value="{{ team.id }}">{{ team.name }}</option>{% endfor %}
+            </select>
+            <br>
+            <label for="second_level_support_team">2L Support Team:</label>
+            <select id="second_level_support_team"
+                    name="second_level_support_team"
+                    required>
+                <option value="" disabled selected>Select Team</option>
+                {% for team in teams %}<option value="{{ team.id }}">{{ team.name }}</option>{% endfor %}
+            </select>
+            <br>
+            <label for="additional_info">Additional Info:</label>
+            <textarea id="additional_info" name="additional_info"></textarea>
+            <br>
+            <button type="submit">Create Equipment</button>
+        </form>
+        <a href="{% url 'equipment_list' %}">Back to List</a>
+    </div>
+{% endblock %}

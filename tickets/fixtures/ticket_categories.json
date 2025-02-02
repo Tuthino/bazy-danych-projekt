@@ -1,0 +1,37 @@
+[
+    {
+        "model": "tickets.category",
+        "pk": 1,
+        "fields": {
+            "name": "Network"
+        }
+    },
+    {
+        "model": "tickets.category",
+        "pk": 2,
+        "fields": {
+            "name": "Hardware"
+        }
+    },
+    {
+        "model": "tickets.category",
+        "pk": 3,
+        "fields": {
+            "name": "Software"
+        }
+    },
+    {
+        "model": "tickets.category",
+        "pk": 4,
+        "fields": {
+            "name": "Security"
+        }
+    },
+     {
+        "model": "tickets.category",
+        "pk": 5,
+        "fields": {
+            "name": "Other"
+        }
+    }
+]

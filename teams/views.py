@@ -54,7 +54,7 @@ def manage_team_view(request, team_id):
     # Fetch all users assigned to the team
     team_users = UserTeam.objects.filter(team=team)
 
-    # Exclude users already assigned to the team from the available list
+    # Exclude users already assigned to the team from the available list for adding new users
     assigned_user_ids = team_users.values_list('user_id', flat=True)
     users = User.objects.exclude(id__in=assigned_user_ids)
 
@@ -68,12 +68,32 @@ def manage_team_view(request, team_id):
                 messages.success(request, f"User {user.username} added to {team.name}.")
                 return redirect("manage_team", team_id=team.id)
         elif "remove_user_id" in request.POST:
-            # Remove a user from the team
+            # Remove a user from the team entirely
             remove_user_id = request.POST.get("remove_user_id")
             user_to_remove = get_object_or_404(User, id=remove_user_id)
             UserTeam.objects.filter(team=team, user=user_to_remove).delete()
             messages.success(request, f"User {user_to_remove.username} removed from {team.name}.")
             return redirect("manage_team", team_id=team.id)
+        elif "assign_teamadmin_id" in request.POST:
+            # Assign team admin role to a team member
+            assign_id = request.POST.get("assign_teamadmin_id")
+            if assign_id:
+                user_to_assign = get_object_or_404(User, id=assign_id)
+                user_team = get_object_or_404(UserTeam, team=team, user=user_to_assign)
+                user_team.teamadmin = True
+                user_team.save()
+                messages.success(request, f"User {user_to_assign.username} is now a team admin for {team.name}.")
+                return redirect("manage_team", team_id=team.id)
+        elif "remove_teamadmin_id" in request.POST:
+            # Remove (demote) team admin role from a team member
+            remove_admin_id = request.POST.get("remove_teamadmin_id")
+            if remove_admin_id:
+                user_to_demote = get_object_or_404(User, id=remove_admin_id)
+                user_team = get_object_or_404(UserTeam, team=team, user=user_to_demote)
+                user_team.teamadmin = False
+                user_team.save()
+                messages.success(request, f"User {user_to_demote.username} is no longer a team admin for {team.name}.")
+                return redirect("manage_team", team_id=team.id)
 
     # Get the currently logged-in user
     user = getSessionUser(request)
@@ -81,6 +101,6 @@ def manage_team_view(request, team_id):
     return render(request, "teams/manage_team.html", {
         "team": team,
         "users": users,
-        "team_users": team_users,  # Pass users in the team to the template
+        "team_users": team_users,
         "user": user,
     })

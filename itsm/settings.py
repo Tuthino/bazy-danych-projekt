@@ -11,6 +11,7 @@ https://docs.djangoproject.com/en/5.1/ref/settings/
 """
 
 from pathlib import Path
+import logging.config
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -26,14 +27,24 @@ SECRET_KEY = 'django-insecure-r3*-92#vp=m&2f*b=+ip+1m^&^_y^*$lb)l(69tnj421=hg75e
 DEBUG = True
 
 ALLOWED_HOSTS = ['*']
+SECURE_SSL_REDIRECT = True  # Redirect HTTP to HTTPS
+SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
+CSRF_COOKIE_SECURE = True  # Ensure CSRF cookies are only sent over HTTPS
+SESSION_COOKIE_SECURE = True  # Ensure session cookies are only sent over HTTPS
+import os
+
+# Ensure the requests library uses the correct CA bundle
+os.environ["REQUESTS_CA_BUNDLE"] = "/usr/local/share/ca-certificates/django.crt"
 
 
 # Application definition
 
 INSTALLED_APPS = [
     'users',
+    'equipments',
     'dashboard',
     'teams',
+    'tickets',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -44,6 +55,7 @@ INSTALLED_APPS = [
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
+    'whitenoise.middleware.WhiteNoiseMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
@@ -80,10 +92,16 @@ DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
         'NAME': 'itsm',
-        'USER': 'postgres',
-        'PASSWORD': 'itsmpass',
+        # 'USER': 'admin',
+        'USER': 'application',
+        # 'PASSWORD': 'itsmpass',
+        'PASSWORD': 'secure_password',
         'HOST': 'itsm-postgres',
         'PORT': '5432',
+        'OPTIONS': {
+            'sslmode': 'require',  
+            'sslrootcert': '/app/db-init/ssl/rootCA.crt',  
+        },
     }
 }
 
@@ -125,8 +143,34 @@ STATIC_URL = 'static/'
 STATICFILES_DIRS = [
     BASE_DIR / "dashboard/static",  # Include the dashboard's static folder
 ]
-
+STATIC_ROOT = BASE_DIR / "staticfiles"
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.1/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+LOGGING = {
+    'version': 1,
+    'disable_existing_loggers': False,
+    'handlers': {
+        'console': {
+            'class': 'logging.StreamHandler',
+        },
+    },
+    'root': {
+        'handlers': ['console'],
+        'level': 'DEBUG',
+    },
+    'loggers': {
+        'django': {
+            'handlers': ['console'],
+            'level': 'INFO',
+            'propagate': True,
+        },
+        'custom': {
+            'handlers': ['console'],
+            'level': 'DEBUG',
+            'propagate': False,
+        },
+    },
+}

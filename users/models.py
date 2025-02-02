@@ -1,17 +1,6 @@
 from django.db import models
-
-# Create your models here.
-from django.db import models
 from django.contrib.auth.models import AbstractBaseUser, BaseUserManager
 
-#
-# class Team(models.Model):
-#     name = models.TextField()
-#
-#     def __str__(self):
-#         return self.name
-#
-#
 class UserManager(BaseUserManager):
     def create_user(self, username, password=None, **extra_fields):
         if not name:
@@ -50,28 +39,3 @@ class User(AbstractBaseUser):
     @property
     def is_admin(self):
         return self.admin
-#
-#
-# class UsernameTeam(models.Model):
-#     username = models.ForeignKey(Username, on_delete=models.CASCADE)
-#     team = models.ForeignKey(Team, on_delete=models.CASCADE)
-#     team_admin = models.BooleanField()
-#
-#     def __str__(self):
-#         return f"{self.username.name} - {self.team.name}"
-#
-#
-# class TicketStatusType(models.Model):
-#     name = models.TextField()
-#
-#     def __str__(self):
-#         return self.name
-#
-
-# class AffectedEquipment(models.Model):
-#     ticket = models.BigIntegerField()
-#     equipment = models.BigIntegerField()
-#
-#     def __str__(self):
-#         return f"Ticket: {self.ticket} - Equipment: {self.equipment}"
-

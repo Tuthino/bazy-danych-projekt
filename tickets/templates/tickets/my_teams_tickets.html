@@ -1,0 +1,78 @@
+{% extends "dashboard/base.html" %}
+{% block title %}My Team Tickets{% endblock %}
+{% block content %}
+    <div class="content">
+        <h1>Tickets Assigned to My Teams</h1>
+        <button class="toggle-btn" data-target="team-list">Show/Hide Teams</button>
+        <ul id="team-list" class="toggle-target" style="display: none;">
+            {% for team in user_teams %}<li>{{ team.name }}</li>{% endfor %}
+        </ul>
+        <form method="get" action="">
+            <label for="status">Filter by Status:</label>
+            <select name="status" id="status">
+                <option value="">All</option>
+                {% for status in statuses %}
+                    <option value="{{ status.id }}"
+                            {% if selected_status == status.id|stringformat:"s" %}selected{% endif %}>
+                        {{ status.name }}
+                    </option>
+                {% endfor %}
+            </select>
+            <button type="submit">Apply Filter</button>
+        </form>
+        <h2>Tickets Assigned to My Teams</h2>
+        <table class="styled-table">
+            <thead>
+                <tr>
+                    <th>Ticket ID</th>
+                    <th>Type</th>
+                    <th>Status</th>
+                    <th>Owner Team</th>
+                    <th>Issue Started</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for ticket in tickets %}
+                    <tr>
+                        <td>{{ ticket.id }}</td>
+                        <td>{{ ticket.type.name }}</td>
+                        <td>{{ ticket.status.name }}</td>
+                        <td>{{ ticket.owner_team.name }}</td>
+                        <td>{{ ticket.issue_started }}</td>
+                        <td>
+                            <a href="{% url 'ticket_detail' ticket.id %}">View Details</a>
+                        </td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+        <h2>Transferred Tickets to My Teams</h2>
+        <table class="styled-table">
+            <thead>
+                <tr>
+                    <th>Ticket ID</th>
+                    <th>Type</th>
+                    <th>Status</th>
+                    <th>Requested Team</th>
+                    <th>Issue Started</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for request in requested_tickets %}
+                    <tr>
+                        <td>{{ request.ticket.id }}</td>
+                        <td>{{ request.ticket.type.name }}</td>
+                        <td>{{ request.status.name }}</td>
+                        <td>{{ request.team }}</td>
+                        <td>{{ request.ticket.issue_started }}</td>
+                        <td>
+                            <a href="{% url 'ticket_detail' request.ticket.id %}">View Details</a>
+                        </td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+{% endblock %}

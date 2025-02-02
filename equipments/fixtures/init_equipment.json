@@ -1,0 +1,106 @@
+[
+    {
+        "model": "equipments.equipment",
+        "pk": 1,
+        "fields": {
+            "name": "PC-1",
+            "site": 1,
+            "type": 1, 
+            "last_change_ticket": null,
+            "first_level_support_team": 1,  
+            "second_level_support_team": 2,
+            "additional_info": "First PC at Headquarters"
+        }
+    },
+    {
+        "model": "equipments.equipment",
+        "pk": 2,
+        "fields": {
+            "name": "PC-2",
+            "site": 2,
+            "type": 1,
+            "last_change_ticket": null,
+            "first_level_support_team": 3,  
+            "second_level_support_team": 4, 
+            "additional_info": "Second PC at Data Center West"
+        }
+    },
+    {
+        "model": "equipments.equipment",
+        "pk": 3,
+        "fields": {
+            "name": "Router-1",
+            "site": 1,
+            "type": 2,  
+            "last_change_ticket": null,
+            "first_level_support_team": 1,
+            "second_level_support_team": 2,
+            "additional_info": "Main router for Headquarters"
+        }
+    },
+    {
+        "model": "equipments.equipment",
+        "pk": 4,
+        "fields": {
+            "name": "Router-2",
+            "site": 2,
+            "type": 2,
+            "last_change_ticket": null,
+            "first_level_support_team": 3,
+            "second_level_support_team": 4,
+            "additional_info": "Backup router for Data Center West"
+        }
+    },
+    {
+        "model": "equipments.equipment",
+        "pk": 5,
+        "fields": {
+            "name": "Switch-1",
+            "site": 1,
+            "type": 3,
+            "last_change_ticket": null,
+            "first_level_support_team": 1,
+            "second_level_support_team": 2,
+            "additional_info": "Primary switch for Headquarters"
+        }
+    },
+    {
+        "model": "equipments.equipment",
+        "pk": 6,
+        "fields": {
+            "name": "Switch-2",
+            "site": 2,
+            "type": 3,
+            "last_change_ticket": null,
+            "first_level_support_team": 3,
+            "second_level_support_team": 4,
+            "additional_info": "Backup switch for Data Center West"
+        }
+    },
+    {
+        "model": "equipments.equipment",
+        "pk": 7,
+        "fields": {
+            "name": "Server-1",
+            "site": 1,
+            "type": 4, 
+            "last_change_ticket": null,
+            "first_level_support_team": 1,
+            "second_level_support_team": 2,
+            "additional_info": "Primary server for Headquarters"
+        }
+    },
+    {
+        "model": "equipments.equipment",
+        "pk": 8,
+        "fields": {
+            "name": "Server-2",
+            "site": 2,
+            "type": 4,
+            "last_change_ticket": null,
+            "first_level_support_team": 3,
+            "second_level_support_team": 4,
+            "additional_info": "Backup server for Data Center West"
+        }
+    }
+]

@@ -27,4 +27,6 @@ urlpatterns = [
     path("permission-denied/", views.permission_denied_view, name="permission_denied"),
     path("dashboard/", include("dashboard.urls")),
     path("teams/", include("teams.urls")),
+    path('equipments/', include('equipments.urls')),
+    path('tickets/', include('tickets.urls')),
 ]

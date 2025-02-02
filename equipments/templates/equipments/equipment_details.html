@@ -1,0 +1,30 @@
+{% extends "dashboard/base.html" %}
+{% block title %}Equipment Details{% endblock %}
+{% block content %}
+<div class="content">
+    <h1>Equipment Details: {{ equipment.name }}</h1>
+    <p><strong>Site:</strong> {{ equipment.site }}</p>
+    <p><strong>Type:</strong> {{ equipment.type.name }}</p>
+    <p><strong>1L Support Team:</strong> {{ equipment.first_level_support_team.name }}</p>
+    <p><strong>2L Support Team:</strong> {{ equipment.second_level_support_team.name }}</p>
+    <p><strong>Additional Info:</strong> {{ equipment.additional_info|default:"N/A" }}</p>
+    <p><strong>Last Change Ticket:</strong> {{ equipment.last_change_ticket|default:"N/A" }}</p>
+    
+    <h2>Unresolved Tickets Affecting This Equipment</h2>
+    {% if tickets %}
+        <ul>
+            {% for ticket in tickets %}
+                <li>
+                    <a href="{% url 'ticket_detail' ticket.id %}">
+                        Ticket #{{ ticket.id }}: {{ ticket.type.name }} - Status: {{ ticket.status.name }}
+                    </a>
+                </li>
+            {% endfor %}
+        </ul>
+    {% else %}
+        <p>No unresolved tickets are associated with this equipment.</p>
+    {% endif %}
+    
+    <a href="{% url 'equipment_list' %}">Back to Equipment List</a>
+</div>
+{% endblock %}

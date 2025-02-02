@@ -1,0 +1,37 @@
+[
+    {
+        "model": "teams.team",
+        "pk": 1,
+        "fields": {
+            "name": "First Level Support A"
+        }
+    },
+    {
+        "model": "teams.team",
+        "pk": 2,
+        "fields": {
+            "name": "Second Level Support A"
+        }
+    },
+    {
+        "model": "teams.team",
+        "pk": 3,
+        "fields": {
+            "name": "First Level Support B"
+        }
+    },
+    {
+        "model": "teams.team",
+        "pk": 4,
+        "fields": {
+            "name": "Second Level Support B"
+        }
+    },    {
+        "model": "teams.team",
+        "pk": 5,
+        "fields": {
+            "name": "Equipment admin",
+            "equipment_admin": true
+        }
+    }
+]

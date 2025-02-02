@@ -3,13 +3,14 @@ from users.models import User  # Assuming the users app exists
 
 class Team(models.Model):
     name = models.CharField(max_length=100, unique=True)
+    equipment_admin = models.BooleanField(default=False)
 
     def __str__(self):
         return self.name
 
 class UserTeam(models.Model):
     team = models.ForeignKey(Team, on_delete=models.CASCADE, related_name='users')
-    user = models.ForeignKey(User, on_delete=models.CASCADE, related_name='teams')  # Use a custom related_name
+    user = models.ForeignKey(User, on_delete=models.CASCADE, related_name='teams')  
     teamadmin = models.BooleanField(default=False)
 
     class Meta:

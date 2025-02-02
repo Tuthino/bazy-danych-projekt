@@ -1,0 +1,100 @@
+[
+    {
+        "model": "teams.userteam",
+        "pk": 1,
+        "fields": {
+            "team": 1,
+            "user": 2,
+            "teamadmin": true
+        }
+    },
+    {
+        "model": "teams.userteam",
+        "pk": 2,
+        "fields": {
+            "team": 2,
+            "user": 2,
+            "teamadmin": true
+        }
+    },
+    {
+        "model": "teams.userteam",
+        "pk": 3,
+        "fields": {
+            "team": 3,
+            "user": 2,
+            "teamadmin": true
+        }
+    },
+    {
+        "model": "teams.userteam",
+        "pk": 4,
+        "fields": {
+            "team": 4,
+            "user": 2,
+            "teamadmin": true
+        }
+    },
+    {
+        "model": "teams.userteam",
+        "pk": 5,
+        "fields": {
+            "team": 5,
+            "user": 2,
+            "teamadmin": true
+        }
+    },
+    {
+        "model": "teams.userteam",
+        "pk": 6,
+        "fields": {
+            "team": 1,
+            "user": 3,
+            "teamadmin": false
+        }
+    },
+    {
+        "model": "teams.userteam",
+        "pk": 7,
+        "fields": {
+            "team": 2,
+            "user": 4,
+            "teamadmin": false
+        }
+    },
+    {
+        "model": "teams.userteam",
+        "pk": 8,
+        "fields": {
+            "team": 3,
+            "user": 5,
+            "teamadmin": false
+        }
+    },
+    {
+        "model": "teams.userteam",
+        "pk": 9,
+        "fields": {
+            "team": 4,
+            "user": 6,
+            "teamadmin": false
+        }
+    },
+    {
+        "model": "teams.userteam",
+        "pk": 10,
+        "fields": {
+            "team": 5,
+            "user": 4,
+            "teamadmin": false
+        }
+    },    {
+        "model": "teams.userteam",
+        "pk": 11,
+        "fields": {
+            "team": 5,
+            "user": 6,
+            "teamadmin": false
+        }
+    }
+]

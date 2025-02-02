@@ -1,0 +1,40 @@
+{% extends "dashboard/base.html" %}
+{% block content %}
+    {% block title %}Equipment List{% endblock %}
+    <div class="content">
+        <h1>Equipment List</h1>
+        <a href="{% url 'equipment_create' %}">Create New Equipment</a>
+        <table class="styled-table">
+            <thead>
+                <tr>
+                    <th>Name</th>
+                    <th>Site</th>
+                    <th>Type</th>
+                    <th>1L Support Team</th>
+                    <th>2L Support Team</th>
+                    <th>Additional Info</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for equipment in equipments %}
+                    <tr>
+                        <td>
+                            {% if is_eq_admin %}
+                                <button type="button"
+                                        onclick="location.href='{% url 'equipment_edit' equipment.id %}';">
+                                    Edit
+                                </button>
+                            {% endif %}
+                            <a href="{% url 'equipment_detail' equipment.id %}">{{ equipment.name }}</a>
+                        </td>
+                        <td>{{ equipment.site }}</td>
+                        <td>{{ equipment.type.name }}</td>
+                        <td>{{ equipment.first_level_support_team.name }}</td>
+                        <td>{{ equipment.second_level_support_team.name }}</td>
+                        <td>{{ equipment.additional_info }}</td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+{% endblock %}

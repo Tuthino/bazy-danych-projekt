@@ -1,0 +1,74 @@
+[
+    {
+        "model": "users.user",
+        "pk": 1,
+        "fields": {
+            "username": "useradmin",
+            "email": "useradmin@example.com",
+            "phone": 1234567890,
+            "logged_in": false,
+            "admin": true,
+            "password": "pbkdf2_sha256$870000$q1qlRBAHuN1j4tmR3EMK2o$IjHM3v9tZkWBMALbc+za4OjlCUOxYOG4ZftXQEh3P/E="
+        }
+    },
+    {
+        "model": "users.user",
+        "pk": 2,
+        "fields": {
+            "username": "teamadmin",
+            "email": "teamadmin@example.com",
+            "phone": 9876543210,
+            "logged_in": false,
+            "admin": false,
+            "password": "pbkdf2_sha256$870000$q1qlRBAHuN1j4tmR3EMK2o$IjHM3v9tZkWBMALbc+za4OjlCUOxYOG4ZftXQEh3P/E="
+        }
+    },
+    {
+        "model": "users.user",
+        "pk": 3,
+        "fields": {
+            "username": "1la",
+            "email": "user3@example.com",
+            "phone": 1112223333,
+            "logged_in": false,
+            "admin": false,
+            "password": "pbkdf2_sha256$870000$q1qlRBAHuN1j4tmR3EMK2o$IjHM3v9tZkWBMALbc+za4OjlCUOxYOG4ZftXQEh3P/E="
+        }
+    },
+    {
+        "model": "users.user",
+        "pk": 4,
+        "fields": {
+            "username": "2la",
+            "email": "user4@example.com",
+            "phone": 4445556666,
+            "logged_in": false,
+            "admin": false,
+            "password": "pbkdf2_sha256$870000$q1qlRBAHuN1j4tmR3EMK2o$IjHM3v9tZkWBMALbc+za4OjlCUOxYOG4ZftXQEh3P/E="
+        }
+    },
+    {
+        "model": "users.user",
+        "pk": 5,
+        "fields": {
+            "username": "1lb",
+            "email": "user5@example.com",
+            "phone": 1112223333,
+            "logged_in": false,
+            "admin": false,
+            "password": "pbkdf2_sha256$870000$q1qlRBAHuN1j4tmR3EMK2o$IjHM3v9tZkWBMALbc+za4OjlCUOxYOG4ZftXQEh3P/E="
+        }
+    },
+    {
+        "model": "users.user",
+        "pk": 6,
+        "fields": {
+            "username": "2lb",
+            "email": "user6@example.com",
+            "phone": 1112223333,
+            "logged_in": false,
+            "admin": false,
+            "password": "pbkdf2_sha256$870000$q1qlRBAHuN1j4tmR3EMK2o$IjHM3v9tZkWBMALbc+za4OjlCUOxYOG4ZftXQEh3P/E="
+        }
+    }
+]
